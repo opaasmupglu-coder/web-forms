@@ -3,9 +3,10 @@ import { AUTH_COOKIE, appPasswordSet, cookieValue } from "@/lib/auth";
 
 // Only the admin area is gated. Public form pages (/f/[slug]), the
 // public submit API, the login page and the auth route stay open so
-// registrants never need a password.
+// registrants never need a password. The admin lives at /form-admin;
+// /api/admin/* is the internal admin API, not a page.
 export const config = {
-  matcher: ["/admin/:path*", "/api/admin/:path*"],
+  matcher: ["/form-admin/:path*", "/api/admin/:path*"],
 };
 
 export async function middleware(req: NextRequest) {

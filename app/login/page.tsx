@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import { SiteFooter, SiteHeader } from "@/components/SiteChrome";
 
 export default function LoginPage() {
   const [password, setPassword] = useState("");
@@ -16,7 +17,7 @@ export default function LoginPage() {
       body: JSON.stringify({ password }),
     });
     if (res.ok) {
-      window.location.href = "/admin";
+      window.location.href = "/form-admin";
     } else {
       const data = await res.json().catch(() => ({}));
       setError(data.error || "Could not sign in.");
@@ -25,36 +26,42 @@ export default function LoginPage() {
   }
 
   return (
-    <div style={{ maxWidth: 440, margin: "48px auto" }}>
-      <p className="kicker">PGLU Forms · Admin</p>
-      <h2 style={{ marginTop: 6 }}>Sign in</h2>
-      <p className="lede">
-        The admin area is protected. Enter the app password to manage lists,
-        forms, and responses.
-      </p>
-      <form onSubmit={submit} style={{ marginTop: 24, borderTop: "1px solid var(--line-dark)", paddingTop: 20 }}>
-        <label htmlFor="password">Password</label>
-        <input
-          id="password"
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
-        />
-        {error && (
-          <div className="notice error" role="alert">
-            <span className="notice-kicker">Error</span>
-            {error}
-          </div>
-        )}
-        <button className="btn block" type="submit" disabled={busy || !password}>
-          {busy ? "Signing in…" : "Sign in"}
-        </button>
-      </form>
-      <p className="muted" style={{ marginTop: 16 }}>
-        Registrants don&apos;t need to sign in — form links are open to anyone
-        with the link.
-      </p>
-    </div>
+    <>
+      <SiteHeader />
+      <main className="container">
+        <div style={{ maxWidth: 440, margin: "48px auto" }}>
+          <p className="kicker">PGLU Forms · Admin</p>
+          <h2 style={{ marginTop: 6 }}>Sign in</h2>
+          <p className="lede">
+            The admin area is protected. Enter the app password to manage lists,
+            forms, and responses.
+          </p>
+          <form onSubmit={submit} style={{ marginTop: 24, borderTop: "1px solid var(--line-dark)", paddingTop: 20 }}>
+            <label htmlFor="password">Password</label>
+            <input
+              id="password"
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              autoComplete="current-password"
+            />
+            {error && (
+              <div className="notice error" role="alert">
+                <span className="notice-kicker">Error</span>
+                {error}
+              </div>
+            )}
+            <button className="btn block" type="submit" disabled={busy || !password}>
+              {busy ? "Signing in…" : "Sign in"}
+            </button>
+          </form>
+          <p className="muted" style={{ marginTop: 16 }}>
+            Registrants don&apos;t need to sign in — form links are open to anyone
+            with the link.
+          </p>
+        </div>
+      </main>
+      <SiteFooter />
+    </>
   );
 }

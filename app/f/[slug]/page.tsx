@@ -1,6 +1,5 @@
 "use client";
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import SearchableSelect from "@/components/SearchableSelect";
 import { ErrorState, LoadingState } from "@/components/ui";
 import type { PublicForm } from "@/lib/types";
@@ -81,15 +80,10 @@ export default function PublicFormPage({ params }: { params: Promise<{ slug: str
   }
 
   if (loading) return <LoadingState what="Loading the form" />;
+  // The public form link shows only the form — no site chrome, no nav,
+  // no link back to the form list. A bad link just says so.
   if (error || !form) {
-    return (
-      <>
-        <ErrorState error={error || "Form not found."} />
-        <p>
-          <Link href="/">← Back to all forms</Link>
-        </p>
-      </>
-    );
+    return <ErrorState error={error || "Form not found."} />;
   }
 
   if (submitted) {
@@ -109,8 +103,7 @@ export default function PublicFormPage({ params }: { params: Promise<{ slug: str
             }}
           >
             Submit another response
-          </button>{" "}
-          <Link href="/">Back to all forms</Link>
+          </button>
         </p>
       </div>
     );

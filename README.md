@@ -29,7 +29,7 @@ place, and the admin can build any form without touching code.
   lists, forms, fields, and submissions. Tables are created automatically
   on first use; `npm run seed` adds starter content.
 - **Admin auth** — a single app password, stored only as a scrypt hash
-  (`APP_PASSWORD_HASH`). The admin area (`/admin`, `/api/admin/*`) is gated
+  (`APP_PASSWORD_HASH`). The admin area (`/form-admin`, `/api/admin/*`) is gated
   by middleware; public form pages are open.
 - **Design** — plain CSS, Bone / Charcoal / Marigold editorial system
   (Fraunces + IBM Plex Sans, self-hosted). No heavy UI framework.
